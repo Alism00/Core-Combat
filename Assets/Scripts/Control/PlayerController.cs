@@ -25,7 +25,8 @@ namespace RPG.Control
         {
             
             if (MouseCombat()) { return; }
-            MouseMovment();
+            if (MouseMovment()) { return; }
+            print("nothing");
         }
 
         private bool MouseCombat()
@@ -37,35 +38,32 @@ namespace RPG.Control
                 if (target == null) { continue; }
                 if (Input.GetMouseButtonDown(0))
                 {
-                    fighter.Attack();
-                    
+                    fighter.Attack(target);
                 }
                 return true;
             }
             return false;
         }
 
-        private void MouseMovment()
+        private bool MouseMovment()
         {
-            if (Input.GetMouseButton(0))
-            {
-                MoveToCurser();
-            }
-        }
 
-        private void MoveToCurser()
-        {
             ray = GetMouseRay();
             RaycastHit hit;
             bool ishit = Physics.Raycast(ray, out hit);
-            Debug.DrawRay(Camera.main.transform.position,hit.point, Color.yellow);
             if (ishit)
             {
-                move.MoveTo(hit.point);
-               
+                if (Input.GetMouseButton(0))
+                {
+                    move.StartMoveAction(hit.point);
+                    Debug.DrawRay(ray.origin,ray.direction *100 );
+                }
+                return true;
             }
-
+            return false;
         }
+
+        
         private Ray GetMouseRay()
         {
             return Camera.main.ScreenPointToRay(Input.mousePosition);
