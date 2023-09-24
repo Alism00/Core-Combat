@@ -13,7 +13,8 @@ public class AIController : MonoBehaviour
     [SerializeField] private float suspicionTime = 2.5f;
     [SerializeField] private PatrolPath patrolPath;
     [SerializeField] private float wayPointDwellTime = 2f;
-
+    [Range(0f, 1f)]
+    [SerializeField] private float patrolSpeedFraction =Mathf.Clamp01(0.2f);
 
     float wayPointRange = 1f;
     private Health health;
@@ -60,13 +61,14 @@ public class AIController : MonoBehaviour
             PatrolBehaviour();
         }
         UpdateTimer();
+        
     }
 
     private void UpdateTimer()
     {
         lastSawTime += Time.deltaTime;
         wayPointReachedTime += Time.deltaTime;
-        Debug.Log(wayPointDwellTime);
+        Debug.Log(wayPointReachedTime);
     }
 
     private void SuspiciosBehavior()
@@ -85,7 +87,7 @@ void PatrolBehaviour()
         Vector3 nextPosition = guardPosition;
         if (patrolPath != null)
         {
-            if (AtWayPoint() )
+            if (AtWayPoint())
             {
                 wayPointReachedTime = 0;
                     CycleWayPoint();
@@ -94,7 +96,7 @@ void PatrolBehaviour()
         }
         if (wayPointReachedTime > wayPointDwellTime)
         {
-            mover.StartMoveAction(nextPosition);
+            mover.StartMoveAction(nextPosition,patrolSpeedFraction);
         }
         
     }

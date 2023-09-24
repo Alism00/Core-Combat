@@ -11,12 +11,12 @@ namespace RPG.Combat
     {
         [SerializeField] float attackRateTime = 1f;
         [SerializeField] float weaponRange = 3f;
+        [SerializeField] private int weaponDamage = 5;
         private Health target;
         private Mover mover;
         private float TimeSinceLastAttack = Mathf.Infinity;
         ActionScheduler actionScheduler;
-        [SerializeField]
-        private int weaponDamage = 5;
+       
         Health health;
         Animator animator;
         private void Start()
@@ -36,7 +36,7 @@ namespace RPG.Combat
             {
                 if (!IsInRange())
                 {
-                    mover.MoveTo(target.transform.position);
+                    mover.StartMoveAction(target.transform.position,1f);
                 }
                 else if (IsInRange())
                 {

@@ -14,6 +14,8 @@ namespace RPG.Control
         Ray ray;
         Health health;
         private Mover move;
+        [SerializeField]
+
         private Fighter fighter;
         // Start is called before the first frame update
         void Start()
@@ -26,9 +28,11 @@ namespace RPG.Control
         // Update is called once per frame
         void Update()
         {
-            if (health.isDead) {
+            if (health.isDead)
+            {
                 move.DisableNavMesh();
-                return; }
+                return;
+            }
             if (MouseCombat()) { return; }
             if (MouseMovment()) { return; }
             print("nothing");
@@ -68,7 +72,7 @@ namespace RPG.Control
             {
                 if (Input.GetMouseButton(0))
                 {
-                    move.StartMoveAction(hit.point);
+                    move.StartMoveAction(hit.point, 1f);
                     Debug.DrawRay(ray.origin, ray.direction * 100);
                 }
                 return true;
