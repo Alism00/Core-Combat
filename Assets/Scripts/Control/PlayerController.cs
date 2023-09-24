@@ -4,6 +4,7 @@ using UnityEngine;
 using RPG.Movement;
 using System;
 using RPG.Combat;
+using RPG.Core;
 
 namespace RPG.Control
 {
@@ -11,22 +12,27 @@ namespace RPG.Control
     public class PlayerController : MonoBehaviour
     {
         Ray ray;
+        Health health;
         private Mover move;
         private Fighter fighter;
         // Start is called before the first frame update
         void Start()
         {
-            move = GetComponent<Mover>();   
-            fighter =GetComponent<Fighter>();
+            health = GetComponent<Health>();
+            move = GetComponent<Mover>();
+            fighter = GetComponent<Fighter>();
         }
 
         // Update is called once per frame
         void Update()
         {
-            
+            if (health.isDead) {
+                move.DisableNavMesh();
+                return; }
             if (MouseCombat()) { return; }
             if (MouseMovment()) { return; }
             print("nothing");
+
         }
 
         private bool MouseCombat()
@@ -35,10 +41,17 @@ namespace RPG.Control
             foreach (RaycastHit hit in hits)
             {
                 CombatTarget target = hit.transform.GetComponent<CombatTarget>();
-                if (target == null) { continue; }
-                if (Input.GetMouseButtonDown(0))
+                if (target == null)
                 {
-                    fighter.Attack(target);
+                    continue;
+                }
+                if (!GetComponent<Fighter>().CanAttack(target.gameObject))
+                {
+                    continue;
+                }
+                if (Input.GetMouseButton(0))
+                {
+                    fighter.Attack(target.gameObject);
                 }
                 return true;
             }
@@ -56,14 +69,14 @@ namespace RPG.Control
                 if (Input.GetMouseButton(0))
                 {
                     move.StartMoveAction(hit.point);
-                    Debug.DrawRay(ray.origin,ray.direction *100 );
+                    Debug.DrawRay(ray.origin, ray.direction * 100);
                 }
                 return true;
             }
             return false;
         }
 
-        
+
         private Ray GetMouseRay()
         {
             return Camera.main.ScreenPointToRay(Input.mousePosition);

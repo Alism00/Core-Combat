@@ -3,6 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Windows.Speech;
+
 namespace RPG.Movement
 {
     public class Mover : MonoBehaviour, IAction
@@ -52,9 +53,11 @@ namespace RPG.Movement
         public void Cancel()
         {
             agent.isStopped = true;
-
         }
-
+        public void DisableNavMesh()
+        {
+            agent.enabled = false;
+        }
 
     }
 }
