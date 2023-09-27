@@ -68,7 +68,6 @@ public class AIController : MonoBehaviour
     {
         lastSawTime += Time.deltaTime;
         wayPointReachedTime += Time.deltaTime;
-        Debug.Log(wayPointReachedTime);
     }
 
     private void SuspiciosBehavior()
