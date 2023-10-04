@@ -38,7 +38,7 @@ namespace RPG.Combat
                 {
                     mover.StartMoveAction(target.transform.position,1f);
                 }
-                else if (IsInRange())
+                else 
                 {
                     AttackBehaviour();
                     mover.Cancel();
@@ -81,6 +81,7 @@ namespace RPG.Combat
         {
             StopAttack();
             target = null;
+            mover.Cancel();
         }
 
         private void StopAttack()

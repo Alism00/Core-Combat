@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: LowPoly - Rock
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Parent: {fileID: 2100000, guid: 6fc6652ed834922468cdd63bb95f7fe2, type: 2}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _Smoothness: 0.3
+    - _TopColorPos: 10
+    - _WindAmplitude: 0.2
+    - _WindSpeed: 10
+    m_Colors:
+    - _BottomColor: {r: 0.63235295, g: 0.63235295, b: 0.63235295, a: 1}
+    - _Color: {r: 0.74509805, g: 0.854902, b: 0.8941177, a: 1}
+    - _TopColor: {r: 0.46929064, g: 0.7286724, b: 0.9117647, a: 1}
+    - _WindCycles: {r: 0, g: 0, b: 0, a: 0}
+    - _WindMagnitude: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []
